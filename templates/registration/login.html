@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Login | {{ domain }}{% endblock %}
+
+{% block hot %}
+{% endblock %}
+<style type="text/css">
+	.mr-6 {
+	margin-right: 4rem!important;
+}
+</style>
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<div class="alert alert-danger" role="alert">
+{% if form.errors.items|length == 1 %}Please correct the error below.{% else %}Please correct the errors below.{% endif %}
+</div>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger border-danger bg-white" role="alert">
+    <span class="fa fa-warning"></span>  {{ error }}
+</div>
+{% endfor %}
+{% endif %}
+<div class="card bg-white mb-3 border mr-6" style="max-width: 30rem; ">
+  <div class="card-header bg-white border-danger">
+  	<center>
+    	<img src="{% static 'img/logo_browser.png' %}" width="60" height="50" class="d-inline-block align-top" alt="">
+	</center>
+  </div>
+  <div class="card-body bg-white">
+  	<center>
+	    <p class="card-text">Fill in the following form to continue</p>	
+    </center>
+    <div id="content-main">
+       	<form method="post" action=".">
+			<div class="form-group">
+		    	{% csrf_token %}
+		  	</div>
+			<div class="form-group">
+			    {{ form.username|as_crispy_field }}
+			</div>
+			<div class="form-group">
+			   {{ form.password|as_crispy_field }}
+			   <input type="hidden" name="next" value="{{ next }}" />
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block sidebar %}
+<ul class="list-group">
+  <a class="list-group-item" href="{% url 'account:password_reset' %}">Forgot my password</a>
+  <a class="list-group-item">Dapibus ac facilisis in</a>
+  <a class="list-group-item">Morbi leo risus</a>
+</ul>
+{% endblock %}

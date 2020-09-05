@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+ <h2>Sign Up</h2>
+ <form method="post" action="">
+  <div class="form-row">
+  	{% csrf_token %}
+    <div class="form-group col-md-6">
+      {{ form.first_name|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-6">
+      {{ form.last_name|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      {{ form.email|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-row">
+  	{{ form.image|as_crispy_field }}
+  </div>
+  <div class="form-row">
+  	<div class="form-group col-md-12">
+  		{{ form.cv|as_crispy_field }}
+  	</div>
+  </div>
+  <h3 class="lead">Your Social Media Account Address</h3>
+  <hr>
+  <div class="form-row">
+  	<div class="form-group col-md-6">
+  		{{ form.facebook|as_crispy_field }}
+  	</div>
+  	<div class="form-group col-md-6">
+  		{{ form.twitter|as_crispy_field }}
+  	</div>
+  </div>
+  <div class="form-row">
+  	<div class="form-group col-md-6">
+  		{{ form.instagram|as_crispy_field }}
+  	</div>
+  	<div class="form-group col-md-6">
+  		{{ form.linkdin|as_crispy_field }}
+  	</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock content %}

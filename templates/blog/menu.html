@@ -1,0 +1,5 @@
+{% for tag in tags %}
+	<li class="nav-item">
+		<a class="nav-link menu text-nav-green" href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name|capfirst }}</a>
+	</li>
+{% endfor %}

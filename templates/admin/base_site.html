@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | inavash Administration {% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}"><img src="{% static 'img/logo-verte-white.png' %}" width="140" height="50" class="d-inline-block align-top" alt=""><div class="lead" style="font-size: 15px;">Protect & Save Eco Africa</div></a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+{% block bg %}
+  bg-light
+{% endblock %}
+{% block hot %}
+{% endblock %}
+
+{% block forms %}
+  <div class="d-flex justify-content-center">
+    <section class="clean-block clean-form p-5 shadow border-topper bg-white">
+      <h3 class="lead text-green">Signup Today</h3>
+      <hr class="bg-green">
+      <div class="container w-auto">
+        <form method="post" enctype="multipart/form-data">
+          <div class="form-row">
+          	{% csrf_token %}
+            <div class="form-group col-md-4">
+              {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4">
+              {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4">
+              {{ form.username|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+            	{{ form.email|as_crispy_field }}
+          	</div>
+          	<div class="form-group col-md-6">
+            	{{ form.age|as_crispy_field }}
+          	</div>
+          </div>
+          <div class="form-row">
+          	<div class="form-group col-md-12">
+          		<div class="custom-file">
+        		  <input type="file" name="image" accept="image/*" class="custom-file-input" id="id_image customFile">
+        		  <label class="custom-file-label" for="customFile">Choose Image</label>
+        		</div>
+          	</div>
+          </div>
+          <div class="form-row">
+          	<div class="form-group col-md-12">
+          		{{ form.cv|as_crispy_field }}
+          	</div>
+          </div>
+          <h3 class="lead text-green">Your Social Media Account Address</h3>
+          <hr class="bg-green">
+          <div class="form-row">
+          	<div class="form-group col-md-6">
+          		{{ form.facebook|as_crispy_field }}
+          	</div>
+          	<div class="form-group col-md-6">
+          		{{ form.twitter|as_crispy_field }}
+          	</div>
+          </div>
+          <div class="form-row">
+          	<div class="form-group col-md-6">
+          		{{ form.instagram|as_crispy_field }}
+          	</div>
+          	<div class="form-group col-md-6">
+          		{{ form.linkdin|as_crispy_field }}
+          	</div>
+          </div>
+          <h3 class="lead text-green">Security</h3>
+          <hr class="bg-green">
+          <div class="form-group">
+            <label for="id_password1" class=" requiredField">
+            	Password<span class="asteriskField">*</span>
+            </label>
+            <input type="password" name="password1" class="textinput textInput form-control" required="" id="id_password1">
+          </div>
+          <div class="form-group">
+            <label for="id_password2" class=" requiredField">
+                Password confirmation<span class="asteriskField">*</span>
+            </label>
+            <input type="password" name="password2" class="textinput textInput form-control" required="" id="id_password2">
+          </div>
+          <button type="submit" class="btn bg-green text-white btn-block">Sign in</button>
+        </form>
+      </div>
+  </div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block pagination %}
+{% endblock %}

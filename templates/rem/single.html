@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load blog_tags %}
+{% load social_share %}
+{% load static %}
+
+{% block title %}{{ post.title|title }}{% endblock %}
+{% block header %}
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/footer.jpg" data-speed="0.8"></div>
+		<div class="home_content_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content">
+							<div class="home_title">Article</div>
+							<div class="breadcrumbs">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="index.html">Home</a></li>
+									<li><a href="category.html">Technology</a></li>
+									<li>Article</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block content %}
+	<div class="content_container">
+		<div class="container">
+			<div class="row">
+
+				<!-- Single Post -->
+
+				<div class="col-lg-9">
+
+					<div class="single_post">
+						<div class="post_image"><img src="images/single.jpg" alt="https://unsplash.com/@cgower"></div>
+						<div class="post_content">
+							<div class="post_category cat_technology"><a href="category.html">technology</a></div>
+							<div class="post_title"><a href="single.html">{{ post.title }}</a></div>
+							<div class="post_info d-flex flex-row align-items-center justify-content-start">
+								<div class="post_author d-flex flex-row align-items-center justify-content-start">
+									<div><div class="post_author_image"><img src="images/author_1.jpg" alt=""></div></div>
+									<div class="post_author_name"><a href="#">Michael Smith</a></div>
+								</div>
+								<div class="post_date"><a href="#">29 April 2018</a></div>
+								<div class="post_comments_num ml-auto"><a href="#">3 comments</a></div>
+							</div>
+							<div class="post_text">
+								<p>{{ post.body|markdown }}.</p>
+							</div>
+							{% if post.url %}
+								<div class="embed-responsive embed-responsive-16by9 mb-3">
+									<iframe class="embed-responsive-item" src="{{ post.url }}" allowfullscreen><i class="fa fa-play" aria-hidden="true"></i></iframe>
+								</div>
+							{% endif %}
+						</div>
+
+						<!-- Social Share -->
+						<div class="post_share d-flex flex-row align-items-center justify-content-start">
+							<div class="post_share_title">Share:</div>
+							<ul class="post_share_list d-flex flex-row align-items-center justify-content-center">
+								<li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+								<li>{% post_to_facebook object_or_url '<i class="fa fa-facebook" aria-hidden="true"></i>' %}</li>
+								<li>{% post_to_twitter '{{ post.title }}. Check it out!' {{ post.title }} '<i class="fa fa-twitter" aria-hidden="true"></i>' %}</li>
+								<li>{% post_to_whatsapp object_or_title '<i class="fa fa-dribbble" aria-hidden="true"></i>' %}</li>
+								<li>{% post_to_linkedin post.title object_or_url '<i class="fa fa-behance" aria-hidden="true"></i>' %}</li>
+								<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+						<!-- Comment Section -->
+					 	<div class="col-md-12 mb-5">
+					 		{% with comments.count as total_comments %}
+							 <h6 class="rec text-muted">{{ total_comments }} Comment{{ total_comments|pluralize }}</h6>
+							{% endwith %}
+			    		</div>
+			    		<div class="col-md-12 mb-5">
+			    		  {% for comment in comments %}
+			    			<div class="media">
+			    				<img src="{% static 'img/avatar.png' %}" class="mr-3 rounded-circle w-5 h-25" alt="..." width="8%">
+			    				<div class="media-body">
+			    					<h6 class="mt-0"><b>{{ comment.name|title }}</b></h6>
+			    					<small class="text-muted mb-0"><span class="lnr lnr-calendar-full mr-2"></span>{{ post.created }}</small>
+			    					<p class="lead m-0">
+			    					{{ comment.body|linebreaks }}
+			    				   {% if user.is_authenticated %}
+			    				   	 {% if post.author == "{{ user.username }}" %}
+									    <a class="btn btn-outline-light text-green" href="{% url 'blog:delete_comment' comment.name comment.id  %}">
+									    	Delete
+									    </a>
+									  {% endif %}
+								   {% endif %}
+			    					</p>
+			    					<p>
+									  <button class="btn btn-outline-light text-green" type="button" data-toggle="collapse" data-target="#collapseExample{{ comment.id }}" aria-expanded="false" aria-controls="collapseExample">
+									    Reply
+									  </button>
+									</p>
+									<div class="collapse mb-3" id="collapseExample{{ comment.id }}">
+									  <div class="card card-body">
+									    <form>
+										  <div class="form-group">
+											
+										  </div>
+										  <button type="submit" class="btn bg-green text-white">Submit</button>
+										</form>
+									  </div>
+									</div>
+			    				</div>
+			    			</div>
+			    		  {% empty %}
+							<p>There are no comments yet.</p>
+					 	  {% endfor %}
+			    		</div>
+
+						<!-- Add Comment Section -->
+			    		<div class="col-md-12 mb-5">
+			    			<h6 class="rec text-muted">Leave a Reply</h6>
+			    		</div>
+			    		<div class="col-md-12 mb-5">
+						  {% if new_comment %}
+						  	<div class="alert alert-success" role="alert">
+							  Your comment has been added.
+							</div>
+						  {% else %}
+						  	<form method="POST">
+							 	<div class="form-group">
+							     	{% csrf_token %}
+							     	<div class="form-row">
+								      <div class="form-group col-md-6 mb-0">
+								        {{ comment_form.name|as_crispy_field }}
+								      </div>
+								      <div class="form-group col-md-6 mb-0">
+								        {{ comment_form.email|as_crispy_field }}
+								      </div>
+								      <div class="form-group col-md-12 mb-0">
+								      	{{ comment_form.body|as_crispy_field }}
+								      </div>
+								    </div>
+							    </div>
+							    <button type="submit" class="btn bg-green text-white">Add Comment</button>
+							</form>
+						  {% endif %}
+						</div>
+						<!-- End Add Comment Section -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block sidebar %}
+	{% block sidebar_1 %}
+	<!-- Latest Posts -->
+		<div class="sidebar_latest">
+			<div class="sidebar_title">Simillar Post</div>
+			<div class="latest_posts">
+				{% for post in similar_posts %}
+				<!-- Latest Post -->
+				<div class="latest_post d-flex flex-row align-items-start justify-content-start">
+					<div><div class="latest_post_image"><img src="{{ post.image.url }}" alt="{{ post.title }}" style="height: 100px;"></div></div>
+					<div class="latest_post_content">
+						<div class="post_category_small cat_video"><a href="category.html">video</a></div>
+						<div class="latest_post_title"><a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a></div>
+						<div class="latest_post_date">{{ post.publish|date:"d F Y" }}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}
+	{{ block.super }}
+{% endblock %}

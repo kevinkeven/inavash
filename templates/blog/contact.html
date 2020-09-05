@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact Us{% endblock %}
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/contact.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/contact_responsive.css' %}">
+{% endblock %}
+{% block header %}
+	<div class="home">
+		<div class="home_content_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content">
+							<div class="home_title">Contact</div>
+							<div class="breadcrumbs">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="index.html">Home</a></li>
+									<li>Contact</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block featured_title %}
+{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between" style="margin-top: -280px;">
+	<div class="row shadow border-topper bg-white">
+		{% if sent %}
+			<section class="clean-block clean-form p-4">
+		        <div class="container w-auto">
+					<div class="alert alert-dark border-green text-green bg-white mt-5" role="alert">
+						<span class="fa fa-check mr-3"></span>Hey Thanks For Your Feedback
+					</div>
+					<div class="p-3">
+						Our Team will make sure that Your "Feedack" is properly<br>
+						handle and but in action if possible.<br><br>
+						
+						<p>Hints:</p>
+						<ul>
+						    <li>Hey Remember time spent among trees in never time wasted</li>
+						    <li>Progress is impossible without hange, and those who can't<br>change their mind can't change anything</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		{% else %}
+		<div class="col-md-8">
+			<section class="clean-block clean-form">
+	            <div class="container w-auto ">
+	                <div class="block-heading p-3">
+	                    <h2 class="text-green">Contact Us</h2>
+	                    <p>Feel Free to Contact Us With the Following</p>
+	                </div>
+	                <form class="p-3" method="POST">
+	                	{% csrf_token %}
+	                    <div class="form-group">
+	                    	{{ form.name|as_crispy_field }}
+	                    </div>
+	                    <div class="form-group">
+	                    	{{ form.email|as_crispy_field }}
+	                    </div>
+	                    <div class="form-group">
+	                    	{{ form.subject|as_crispy_field }}
+	                    </div>
+	                    <div class="form-group">
+	                    	{{ form.message|as_crispy_field }}
+	                    </div>
+	                    <div class="form-group"><button class="btn bg-primary text-white btn-block" type="submit">Send</button></div>
+	                </form>
+	            </div>
+	        </section>
+	        
+	    </div>
+	    <div class="col-md-4 contact-info">
+			<div class="block-heading p-3">
+	            <h2 class="text-green">Contact Information</h2>
+	        </div>
+	        <div class="container bg-light p-3 mb-5">
+	        	<u><h5>Contact:</h5></u>
+				<p>
+					Phone: +1 321 2345 678-9<br>
+					Fax: +1 321 2345 876-7
+	        	</p>
+	        </div>
+	        <div class="container bg-light p-3 mb-5">
+	        	<u><h5>For More Information:</h5></u>
+				<p>
+					Email: info@inavash.com<br>
+					contact@inavash.com
+	        	</p>
+	        </div>
+	        <div class="container bg-light p-3 mb-5">
+	        	<u><h5>Contact:</h5></u>
+				<p>
+					Phone: +1 321 2345 678-9<br>
+					Fax: +1 321 2345 876-7
+	        	</p>
+	        </div>
+    	</div>
+    	{% endif %}
+	</div>
+</div>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block js_link %}
+<script src="js/contact.js"></script>
+{% endblock %}
+{% block pagination %}
+{% endblock %}
