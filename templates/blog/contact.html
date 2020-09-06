@@ -1,37 +1,14 @@
 {% extends "base.html" %}
-{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %}Contact Us{% endblock %}
-{% block link %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/contact.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/contact_responsive.css' %}">
+{% block bg %}
+	bg-light
 {% endblock %}
-{% block header %}
-	<div class="home">
-		<div class="home_content_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="home_content">
-							<div class="home_title">Contact</div>
-							<div class="breadcrumbs">
-								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li><a href="index.html">Home</a></li>
-									<li>Contact</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% block hot %}
 {% endblock %}
-{% block featured_title %}
-{% endblock %}
-{% block content %}
-<div class="d-flex justify-content-between" style="margin-top: -280px;">
+{% block forms %}
+<div class="d-flex justify-content-center">
 	<div class="row shadow border-topper bg-white">
 		{% if sent %}
 			<section class="clean-block clean-form p-4">
@@ -73,7 +50,7 @@
 	                    <div class="form-group">
 	                    	{{ form.message|as_crispy_field }}
 	                    </div>
-	                    <div class="form-group"><button class="btn bg-primary text-white btn-block" type="submit">Send</button></div>
+	                    <div class="form-group"><button class="btn bg-green text-white btn-block" type="submit">Send</button></div>
 	                </form>
 	            </div>
 	        </section>
@@ -109,10 +86,9 @@
 	</div>
 </div>
 {% endblock %}
-{% block sidebar %}
+{% block footer %}
 {% endblock %}
-{% block js_link %}
-<script src="js/contact.js"></script>
+{% block sidebar %}
 {% endblock %}
 {% block pagination %}
 {% endblock %}

@@ -1,0 +1,44 @@
+.sign-in-cont {
+  padding-top: 27px;
+  padding-bottom: 37px;
+}
+.ino-class {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.form-control {
+    border: none;
+	border-bottom: 1px red;
+    padding: 2px 2px;
+    border-bottom: 1px solid black;
+    display: block;
+    border-radius: .10rem;   
+}
+.form-control:focus {
+	box-shadow: none;
+    border-bottom: 1px solid #99e7fe;  
+}
+.hei-50 {
+	height: 450px;
+}
+.mr-6{
+	margin-right: 4rem!important;
+}
+.bd-common {
+	border-bottom: 1px solid black;
+}
+.badge-fb {
+	color: white;
+  	background: #3b5998;
+}
+.bg-common {
+	background-color: #99e7fe;
+}
+.container {
+	background-size: cover;
+}
+@media screen and (max-width: 1200px) {
+	.container {
+		width: 97%!important;
+		height: 10%!important;
+}}

@@ -1,0 +1,8 @@
+{% for post in latest_posts %}
+<div class="post post-thumb">
+	<a class="post-img" href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" alt="" height="200"></a>
+	 <div class="post-body">
+	    <h3 class="post-title"><a href="{{ post.get_absolute_url }}" class="card-link">{{ post.title }}</a></h3><span class="lnr lnr-calendar-full post-date text-white"> {{ post.publish|date:"d F Y" }}</span>
+	  </div>
+</div>
+{% endfor %}

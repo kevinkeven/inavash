@@ -1,0 +1,25 @@
+.author-img {
+	margin-top: -80px;
+}
+.mar-t-5 {
+	margin-top: 6rem!important;
+}
+.author-name {
+	margin-left: 0rem;
+	margin-top: -35px;
+}
+.author {
+	width: 50%;
+}
+@media screen and (max-width: 1200px) {
+	.container {
+		width: 97%!important;
+		height: 10%!important;
+	}
+	.author-name {
+		margin-left: 0rem;
+	}
+	.sign-in-cont {
+
+	}
+}
